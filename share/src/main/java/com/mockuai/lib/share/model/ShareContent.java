@@ -102,7 +102,7 @@ public class ShareContent {
             return this;
         }
 
-        public Builder type(String url) {
+        public Builder url(String url) {
             this.url = url;
             return this;
         }

@@ -77,13 +77,19 @@ public class PlatformConfig {
 
         private String redirectUrl;
 
+        private static final String DEFAULT_REDIRECT_URL = "https://api.weibo.com/oauth2/default.html";
+
         private static final String DEFAULT_SCOPE = "email,direct_messages_read,direct_messages_write,"
                 + "friendships_groups_read,friendships_groups_write,statuses_to_me_read,"
                 + "follow_app_official_microblog," + "invitation_write";
 
         private String scope;
 
-        public SinaConfig(String appKey, String redirectUrl) {
+        public SinaConfig(String appKey) {
+            this(appKey, DEFAULT_REDIRECT_URL, DEFAULT_SCOPE);
+        }
+
+        SinaConfig(String appKey, String redirectUrl) {
             this(appKey, redirectUrl, DEFAULT_SCOPE);
         }
 
