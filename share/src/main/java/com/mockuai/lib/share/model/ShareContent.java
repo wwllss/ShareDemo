@@ -1,11 +1,14 @@
 package com.mockuai.lib.share.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.mockuai.lib.share.annotate.ShareContentTypeDef;
 
 /**
  * Created by zhangyuan on 16/3/21.
  */
-public class ShareContent {
+public class ShareContent implements Parcelable {
 
     public static final int TEXT = 1;
 
@@ -34,6 +37,26 @@ public class ShareContent {
         this.url = builder.url;
         this.imageUrl = builder.imageUrl;
     }
+
+    protected ShareContent(Parcel in) {
+        type = in.readInt();
+        title = in.readString();
+        text = in.readString();
+        url = in.readString();
+        imageUrl = in.readString();
+    }
+
+    public static final Creator<ShareContent> CREATOR = new Creator<ShareContent>() {
+        @Override
+        public ShareContent createFromParcel(Parcel in) {
+            return new ShareContent(in);
+        }
+
+        @Override
+        public ShareContent[] newArray(int size) {
+            return new ShareContent[size];
+        }
+    };
 
     public int getType() {
         return type;
@@ -73,6 +96,20 @@ public class ShareContent {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(type);
+        dest.writeString(title);
+        dest.writeString(text);
+        dest.writeString(url);
+        dest.writeString(imageUrl);
     }
 
     public static class Builder {

@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 23
+    compileSdkVersion 22
     buildToolsVersion "23.0.2"
 
     defaultConfig {
-        applicationId "com.mockuai.lib.sharedemo"
+        applicationId "${APPLICATION_ID}"
         minSdkVersion 14
-        targetSdkVersion 23
+        targetSdkVersion 22
         versionCode 1
         versionName "1.0"
     }
@@ -16,11 +16,29 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    signingConfigs {
+        debug {
+            storeFile file("${rootDir}/${DEBUG_STORE_FILE}")
+            keyPassword "${DEBUG_KEY_PASSWORD}"
+            keyAlias "${DEBUG_KEY_ALIAS}"
+            storePassword "${DEBUG_STORE_PASSWORD}"
+        }
+        release {
+            storeFile file("${rootDir}/${DEBUG_STORE_FILE}")
+            keyPassword "${DEBUG_KEY_PASSWORD}"
+            keyAlias "${DEBUG_KEY_ALIAS}"
+            storePassword "${DEBUG_STORE_PASSWORD}"
+        }
     }
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.2.1'
+    compile project(':share')
 }

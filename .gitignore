@@ -1,4 +1,7 @@
 *.iml
 .gradle
 /local.properties
+/gradle.properties
+/hjsj.jks
+/build
 /.idea

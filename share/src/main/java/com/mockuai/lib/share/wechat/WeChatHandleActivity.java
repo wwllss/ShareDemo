@@ -1,8 +1,8 @@
 package com.mockuai.lib.share.wechat;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.widget.Toast;
 
 import com.mockuai.lib.share.PlatformConfig;
@@ -20,7 +20,7 @@ import com.tencent.mm.sdk.openapi.WXAPIFactory;
 /**
  * Created by zhangyuan on 16/3/22.
  */
-public class WeChatHandleActivity extends Activity implements IWXAPIEventHandler {
+public class WeChatHandleActivity extends FragmentActivity implements IWXAPIEventHandler {
 
     private IWXAPI api;
 
@@ -133,6 +133,7 @@ public class WeChatHandleActivity extends Activity implements IWXAPIEventHandler
                 }
                 break;
             }
+            CallbackManager.getInstance().removeOnShareListener(getTransaction());
         }
     }
 

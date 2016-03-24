@@ -13,6 +13,7 @@ import android.util.Log;
 import com.mockuai.lib.share.IShare;
 import com.mockuai.lib.share.PlatformConfig;
 import com.mockuai.lib.share.constant.Platform;
+import com.mockuai.lib.share.listener.CallbackManager;
 import com.mockuai.lib.share.listener.OnShareListener;
 import com.mockuai.lib.share.model.ShareContent;
 import com.mockuai.lib.share.utils.BitmapUtil;
@@ -55,6 +56,8 @@ public class SinaShare implements IShare {
 
     private Bitmap bitmap;
 
+    private String transaction;
+
     SinaShare(Context context) {
         this.context = context;
         config = PlatformConfig.getInstance().getSinaConfig();
@@ -75,6 +78,14 @@ public class SinaShare implements IShare {
     @Override
     public void share(final ShareContent content, OnShareListener onShareListener) {
         this.listener = onShareListener;
+        this.transaction = ShareUtil.buildTransaction(Platform.SINA, content.getType());
+        CallbackManager.getInstance().addOnShareListener(transaction, listener);
+
+        SinaHandleActivity.newIntent(context, transaction, content);
+    }
+
+    void realShare(final ShareContent content, String transaction) {
+        this.transaction = transaction;
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
@@ -106,7 +117,7 @@ public class SinaShare implements IShare {
         }
 
         SendMultiMessageToWeiboRequest request = new SendMultiMessageToWeiboRequest();
-        request.transaction = ShareUtil.buildTransaction(Platform.SINA, content.getType());
+        request.transaction = transaction;
         request.multiMessage = msg;
 
         sendrequest(request);
@@ -130,6 +141,7 @@ public class SinaShare implements IShare {
             public void onWeiboException(WeiboException arg0) {
                 if (listener != null)
                     listener.onFailed();
+                onRemoveListener();
             }
 
             @Override
@@ -138,14 +150,21 @@ public class SinaShare implements IShare {
                 AccessTokenKeeper.writeAccessToken(context, newToken);
                 if (listener != null)
                     listener.onSuccess();
+                onRemoveListener();
             }
 
             @Override
             public void onCancel() {
                 if (listener != null)
                     listener.onCancel();
+                onRemoveListener();
+            }
+
+            private void onRemoveListener() {
+                CallbackManager.getInstance().removeOnShareListener(transaction);
             }
         });
+
     }
 
     /**
