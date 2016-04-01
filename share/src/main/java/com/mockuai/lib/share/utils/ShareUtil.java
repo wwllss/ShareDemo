@@ -23,7 +23,11 @@ public class ShareUtil {
             case ShareContent.MUSIC:
                 prefix += "music";
         }
-        return prefix + System.currentTimeMillis();
+        return buildTransaction(prefix);
+    }
+
+    public static String buildTransaction(String key) {
+        return key + System.currentTimeMillis();
     }
 
     public static String getPlatformDesc(Platform platform) {

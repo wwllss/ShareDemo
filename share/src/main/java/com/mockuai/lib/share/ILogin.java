@@ -1,5 +1,6 @@
 package com.mockuai.lib.share;
 
+import com.mockuai.lib.share.listener.OnLoginListener;
 import com.mockuai.lib.share.listener.OnShareListener;
 import com.mockuai.lib.share.model.ShareContent;
 
@@ -8,6 +9,6 @@ import com.mockuai.lib.share.model.ShareContent;
  */
 public interface ILogin {
 
-    void login(OnShareListener onShareListener);
+    void login(OnLoginListener onLoginListener);
 
 }

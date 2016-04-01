@@ -5,11 +5,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
+import com.mockuai.lib.share.ILogin;
 import com.mockuai.lib.share.IShare;
 import com.mockuai.lib.share.constant.Platform;
 import com.mockuai.lib.share.factory.PlatformFactory;
+import com.mockuai.lib.share.listener.OnLoginListener;
 import com.mockuai.lib.share.listener.OnShareListener;
 import com.mockuai.lib.share.model.ShareContent;
 
@@ -58,6 +61,26 @@ public class MainActivity extends Activity {
     public void shareByWeChatTimeLine(View view) {
         IShare share = PlatformFactory.createShare(this, Platform.WE_CHAT_TIME_LINE);
         share.share(shareContent, listener);
+    }
+
+    public void loginByWeChat(final View view) {
+        ILogin login = PlatformFactory.createLogin(this, Platform.WE_CHAT);
+        login.login(new OnLoginListener() {
+            @Override
+            public void onSuccess(String code) {
+                Toast.makeText(MainActivity.this, "获取code成功", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCancel() {
+                Toast.makeText(MainActivity.this, "登录取消", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailed() {
+                Toast.makeText(MainActivity.this, "登录失败", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private static final String TAG = "MainActivity";

@@ -85,7 +85,7 @@ public class WeChatHandleActivity extends FragmentActivity implements IWXAPIEven
             this.transaction = resp.transaction;
         }
 
-        public BaseResp getResp() {
+        public T getResp() {
             return resp;
         }
 
@@ -149,7 +149,7 @@ public class WeChatHandleActivity extends FragmentActivity implements IWXAPIEven
             switch (getResp().errCode) {
                 case BaseResp.ErrCode.ERR_OK: {
                     if (listener != null) {
-                        listener.onSuccess();
+                        listener.onSuccess(getResp().code);
                     }
                 }
                 break;
@@ -166,6 +166,7 @@ public class WeChatHandleActivity extends FragmentActivity implements IWXAPIEven
                 }
                 break;
             }
+            CallbackManager.getInstance().removeOnLoginListener(getTransaction());
         }
     }
 }

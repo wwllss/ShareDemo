@@ -5,7 +5,7 @@ package com.mockuai.lib.share.listener;
  */
 public interface OnLoginListener {
 
-    void onSuccess();
+    void onSuccess(String code);
 
     void onCancel();
 

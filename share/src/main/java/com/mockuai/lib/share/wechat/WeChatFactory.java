@@ -23,6 +23,6 @@ public class WeChatFactory extends PlatformFactory {
 
     @Override
     public ILogin createLogin() {
-        return new WeChatLogin();
+        return new WeChatLogin(getContext());
     }
 }
