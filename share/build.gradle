@@ -23,5 +23,5 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile files('libs/libammsdk.jar')
     compile files('libs/weiboSDKCore_3.1.4.jar')
-    compile 'com.android.support:support-v4:22.0.0'
+    compile 'com.android.support:support-annotations:22.2.0'
 }
