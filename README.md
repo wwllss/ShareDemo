@@ -6,12 +6,13 @@
 Maven:
 ```
 <dependency>
-  <groupId>com.jakewharton</groupId>
-  <artifactId>butterknife</artifactId>
-  <version>7.0.1</version>
+  <groupId>com.mockuai.lib.share</groupId>
+  <artifactId>share</artifactId>
+  <version>1.0.0</version>
+  <type>pom</type>
 </dependency>
 ```
 or Gradle:
 ```
-compile 'com.jakewharton:butterknife:7.0.1'
+compile 'com.mockuai.lib.share:share:1.0.0'
 ```
