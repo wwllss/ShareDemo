@@ -1,5 +1,28 @@
 apply plugin: 'com.android.library'
 
+apply plugin: 'com.novoda.bintray-release' // must be applied after your artifact generating plugin (eg. java / com.android.library)
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.novoda:bintray-release:0.3.4'
+    }
+}
+publish {
+    artifactId = 'share' // library的名字
+    userOrg = rootProject.userOrg //用户所在组织
+    groupId = rootProject.groupId // 包名
+    publishVersion = rootProject.publishVersion // 版本
+    description = rootProject.description // 描述
+    website = rootProject.website
+    bintrayUser = rootProject.bintrayUser // 账户名
+    bintrayKey = rootProject.bintrayKey // 就是API key
+    dryRun = rootProject.dryRun
+
+}
+
 android {
     compileSdkVersion 22
     buildToolsVersion "23.0.2"

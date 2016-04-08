@@ -18,6 +18,18 @@ allprojects {
     }
 }
 
+ext {
+    userOrg = 'wwllss'
+    groupId = 'com.mockuai.lib.share'
+    description = 'share lib'
+    publishVersion = '1.0.0'
+    website = 'https://github.com/wwllss/ShareDemo'
+    dryRun = 'false'
+
+    bintrayUser = "$BINTRAY_USER"
+    bintrayKey = "$BINTRAY_KEY"
+}
+
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
