@@ -46,13 +46,11 @@ public class PlatformConfig {
     }
 
     public static class WeChatConfig {
+
         private String appKey;
 
-        private String appSecret;
-
-        public WeChatConfig(String appKey, String appSecret) {
+        public WeChatConfig(String appKey) {
             this.appKey = appKey;
-            this.appSecret = appSecret;
         }
 
         public String getAppKey() {
@@ -61,14 +59,6 @@ public class PlatformConfig {
 
         public void setAppKey(String appKey) {
             this.appKey = appKey;
-        }
-
-        public String getAppSecret() {
-            return appSecret;
-        }
-
-        public void setAppSecret(String appSecret) {
-            this.appSecret = appSecret;
         }
     }
 
