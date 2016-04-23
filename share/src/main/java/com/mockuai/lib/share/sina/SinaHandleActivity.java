@@ -47,6 +47,7 @@ public class SinaHandleActivity extends Activity implements IWeiboHandler.Respon
         if (TextUtils.isEmpty(transaction)) {
             if (savedInstanceState != null) {
                 api.handleWeiboResponse(getIntent(), this);
+            } else {
                 finish();
             }
         } else {
@@ -60,7 +61,6 @@ public class SinaHandleActivity extends Activity implements IWeiboHandler.Respon
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         api.handleWeiboResponse(intent, this);
-        finish();
     }
 
     @Override
@@ -92,6 +92,6 @@ public class SinaHandleActivity extends Activity implements IWeiboHandler.Respon
             }
             CallbackManager.getInstance().removeOnShareListener(baseResponse.transaction);
         }
-
+        finish();
     }
 }
