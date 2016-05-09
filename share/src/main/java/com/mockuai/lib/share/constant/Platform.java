@@ -5,6 +5,10 @@ package com.mockuai.lib.share.constant;
  */
 public enum Platform {
 
+    QQ,
+
+    QZONE,
+
     WE_CHAT,
 
     WE_CHAT_TIME_LINE,

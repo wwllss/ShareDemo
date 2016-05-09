@@ -5,6 +5,7 @@ import android.content.Context;
 import com.mockuai.lib.share.ILogin;
 import com.mockuai.lib.share.IShare;
 import com.mockuai.lib.share.constant.Platform;
+import com.mockuai.lib.share.qq.QQFactory;
 import com.mockuai.lib.share.sina.SinaFactory;
 import com.mockuai.lib.share.wechat.WeChatFactory;
 
@@ -33,6 +34,8 @@ public abstract class PlatformFactory {
             factory = new WeChatFactory(context);
         } else if (platform == Platform.SINA) {
             factory = new SinaFactory(context);
+        } else if (platform == Platform.QQ || platform == Platform.QZONE){
+            factory = new QQFactory(context);
         }
         return factory;
     }

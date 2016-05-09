@@ -15,6 +15,8 @@ public class PlatformConfig {
 
     private SinaConfig sinaConfig;
 
+    private QQConfig qqConfig;
+
     public static PlatformConfig getInstance() {
         if (instance == null) {
             synchronized (PlatformConfig.class) {
@@ -29,12 +31,13 @@ public class PlatformConfig {
     private PlatformConfig() {
     }
 
-    public void config(WeChatConfig weChatConfig, SinaConfig sinaConfig) {
+    public void config(WeChatConfig weChatConfig, SinaConfig sinaConfig,QQConfig qqConfig) {
         this.weChatConfig = weChatConfig;
         if (sinaConfig == null) {
             Log.e(TAG, "sina config can not be null");
         }
         this.sinaConfig = sinaConfig;
+        this.qqConfig = qqConfig;
     }
 
     public WeChatConfig getWeChatConfig() {
@@ -43,6 +46,10 @@ public class PlatformConfig {
 
     public SinaConfig getSinaConfig() {
         return sinaConfig;
+    }
+
+    public QQConfig getQQConfig() {
+        return qqConfig;
     }
 
     public static class WeChatConfig {
@@ -111,6 +118,22 @@ public class PlatformConfig {
 
         public void setScope(String scope) {
             this.scope = scope;
+        }
+    }
+
+    public static class QQConfig {
+        private String tencentId;
+
+        public QQConfig(String tencentId) {
+            this.tencentId = tencentId;
+        }
+
+        public String getTencentId() {
+            return tencentId;
+        }
+
+        public void setTencentId(String tencentId) {
+            this.tencentId = tencentId;
         }
     }
 

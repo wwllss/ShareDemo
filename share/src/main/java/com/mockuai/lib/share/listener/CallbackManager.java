@@ -1,5 +1,8 @@
 package com.mockuai.lib.share.listener;
 
+import com.tencent.tauth.IUiListener;
+
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,9 +17,12 @@ public class CallbackManager {
 
     private final Map<String, OnLoginListener> LoginMap;
 
+    private final Map<String, IUiListener> qqShareMap;
+
     private CallbackManager() {
-        shareMap = new HashMap<>();
-        LoginMap = new HashMap<>();
+        shareMap = Collections.synchronizedMap(new HashMap<String, OnShareListener>());
+        LoginMap = Collections.synchronizedMap(new HashMap<String, OnLoginListener>());
+        qqShareMap = Collections.synchronizedMap(new HashMap<String, IUiListener>());
     }
 
     public static CallbackManager getInstance() {
@@ -54,5 +60,18 @@ public class CallbackManager {
 
     public void addOnLoginListener(String transaction, OnLoginListener onLoginListener) {
         LoginMap.put(transaction, onLoginListener);
+    }
+
+    public void addOnQQShareListener(String transaction, IUiListener iUiListener) {
+        qqShareMap.put(transaction, iUiListener);
+    }
+
+    public IUiListener getOnQQShareListener(String transaction) {
+        return qqShareMap.get(transaction);
+    }
+
+    public void removeOnQQShareListener(String transaction) {
+        if (qqShareMap.containsKey(transaction))
+            qqShareMap.remove(transaction);
     }
 }
