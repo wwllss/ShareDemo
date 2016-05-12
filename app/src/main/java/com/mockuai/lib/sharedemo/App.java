@@ -13,7 +13,9 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         PlatformConfig.getInstance().config(
-                new PlatformConfig.WeChatConfig("wx4aaa888cb11aa851"),
+                new PlatformConfig.WeChatConfig("wx4aaa888cb11aa851")
+        );
+        PlatformConfig.getInstance().config(
                 new PlatformConfig.SinaConfig("1918832594")
         );
     }
