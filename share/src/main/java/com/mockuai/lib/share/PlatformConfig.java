@@ -31,12 +31,15 @@ public class PlatformConfig {
     private PlatformConfig() {
     }
 
-    public void config(WeChatConfig weChatConfig, SinaConfig sinaConfig,QQConfig qqConfig) {
+    public void config(WeChatConfig weChatConfig) {
         this.weChatConfig = weChatConfig;
-        if (sinaConfig == null) {
-            Log.e(TAG, "sina config can not be null");
-        }
+    }
+
+    public void config(SinaConfig sinaConfig) {
         this.sinaConfig = sinaConfig;
+    }
+
+    public void config(QQConfig qqConfig) {
         this.qqConfig = qqConfig;
     }
 
@@ -86,7 +89,7 @@ public class PlatformConfig {
             this(appKey, DEFAULT_REDIRECT_URL, DEFAULT_SCOPE);
         }
 
-        SinaConfig(String appKey, String redirectUrl) {
+        public SinaConfig(String appKey, String redirectUrl) {
             this(appKey, redirectUrl, DEFAULT_SCOPE);
         }
 
