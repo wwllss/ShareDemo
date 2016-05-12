@@ -70,6 +70,9 @@ public class BitmapUtil {
     }
 
     public static Bitmap scaleCenterCrop(Bitmap source, int newHeight, int newWidth) {
+        if (source == null) {
+            return null;
+        }
         int sourceWidth = source.getWidth();
         int sourceHeight = source.getHeight();
 
