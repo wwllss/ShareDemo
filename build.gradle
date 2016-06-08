@@ -22,7 +22,7 @@ ext {
     userOrg = 'wwllss'
     groupId = 'com.mockuai.lib.share'
     description = 'share lib'
-    publishVersion = '1.6'
+    publishVersion = '1.7'
     website = 'https://github.com/wwllss/ShareDemo'
     dryRun = 'false'
 
