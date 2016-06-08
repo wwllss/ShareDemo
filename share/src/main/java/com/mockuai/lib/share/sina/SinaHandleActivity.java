@@ -54,7 +54,6 @@ public class SinaHandleActivity extends Activity implements IWeiboHandler.Respon
             IShare share = PlatformFactory.createShare(this, Platform.SINA);
             SinaShare sinaShare = (SinaShare) share;
             sinaShare.realShare((ShareContent) getIntent().getParcelableExtra(KEY_SHARE_CONTENT), transaction);
-            finish();
         }
     }
 
