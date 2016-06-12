@@ -17,6 +17,8 @@ import com.tencent.tauth.IUiListener;
 import com.tencent.tauth.Tencent;
 import com.tencent.tauth.UiError;
 
+import java.util.ArrayList;
+
 /**
  * Created by zhangyuan on 16/5/9.
  */
@@ -92,7 +94,9 @@ public class QQShare implements IShare {
         bundle.putString(QzoneShare.SHARE_TO_QQ_TITLE, content.getTitle());
         bundle.putString(QzoneShare.SHARE_TO_QQ_SUMMARY, content.getText());
         bundle.putString(QzoneShare.SHARE_TO_QQ_TARGET_URL, content.getUrl());
-        bundle.putString(QzoneShare.SHARE_TO_QQ_IMAGE_URL, content.getImageUrl());
+        ArrayList<String> list = new ArrayList<>();
+        list.add(content.getImageUrl());
+        bundle.putStringArrayList(QzoneShare.SHARE_TO_QQ_IMAGE_URL, list);
         return bundle;
     }
 

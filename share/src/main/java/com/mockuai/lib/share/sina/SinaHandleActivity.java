@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.mockuai.lib.share.IShare;
@@ -24,6 +25,8 @@ import com.sina.weibo.sdk.constant.WBConstants;
  * Created by zhangyuan on 16/3/23.
  */
 public class SinaHandleActivity extends Activity implements IWeiboHandler.Response {
+
+    private static final String TAG = "SinaHandleActivity";
 
     private static final String KEY_TRANSACTION = "TRANSACTION";
 
@@ -53,7 +56,12 @@ public class SinaHandleActivity extends Activity implements IWeiboHandler.Respon
         } else {
             IShare share = PlatformFactory.createShare(this, Platform.SINA);
             SinaShare sinaShare = (SinaShare) share;
-            sinaShare.realShare((ShareContent) getIntent().getParcelableExtra(KEY_SHARE_CONTENT), transaction);
+            try {
+                sinaShare.realShare((ShareContent) getIntent().getParcelableExtra(KEY_SHARE_CONTENT), transaction);
+            } catch (Throwable e) {
+                Log.e(TAG, "SINA分享失败");
+                finish();
+            }
         }
     }
 

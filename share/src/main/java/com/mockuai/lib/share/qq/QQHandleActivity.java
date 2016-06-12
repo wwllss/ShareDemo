@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.mockuai.lib.share.IShare;
 import com.mockuai.lib.share.PlatformConfig;
@@ -18,11 +19,15 @@ import com.tencent.tauth.Tencent;
  */
 public class QQHandleActivity extends Activity {
 
+    private static final String TAG = "QQHandleActivity";
+
     private static final String KEY_TRANSACTION = "TRANSACTION";
 
     private static final String KEY_SHARE_CONTENT = "SHARE_CONTENT";
 
     private static final String KEY_PLATFORM = "PLATFORM";
+
+    private boolean hasResult, isFirst = true;
 
     private String transaction;
 
@@ -41,11 +46,29 @@ public class QQHandleActivity extends Activity {
         transaction = getIntent().getStringExtra(KEY_TRANSACTION);
         IShare share = PlatformFactory.createShare(this, platform);
         QQShare qqShare = (QQShare) share;
-        qqShare.realShare(this, (ShareContent) getIntent().getParcelableExtra(KEY_SHARE_CONTENT), transaction, platform);
+        try {
+            qqShare.realShare(this, (ShareContent) getIntent().getParcelableExtra(KEY_SHARE_CONTENT), transaction, platform);
+        } catch (Throwable e) {
+            Log.e(TAG, "QQ分享失败");
+            finish();
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (isFirst) {
+            isFirst = false;
+        } else {
+            if (!hasResult) {
+                finish();
+            }
+        }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        hasResult = true;
         finish();
         Tencent.onActivityResultData(requestCode, resultCode, data, CallbackManager.getInstance().getOnQQShareListener(transaction));
         CallbackManager.getInstance().removeOnQQShareListener(transaction);
