@@ -72,7 +72,22 @@ public class SinaHandleActivity extends Activity implements IWeiboHandler.Respon
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        if (isFirst) {
+            isFirst = false;
+        } else {
+            if (!hasResp) {
+                finish();
+            }
+        }
+    }
+
+    boolean hasResp, isFirst = true;
+
+    @Override
     public void onResponse(BaseResponse baseResponse) {
+        hasResp = true;
         if (baseResponse != null) {
             OnShareListener listener = CallbackManager.getInstance().getOnShareListener(baseResponse.transaction);
             switch (baseResponse.errCode) {

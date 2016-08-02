@@ -102,7 +102,7 @@ public class SinaShare implements IShare {
 
     private void buildMessage(ShareContent content) {
         WeiboMultiMessage msg = new WeiboMultiMessage();
-        msg.textObject = getTextObj(content.getTitle());
+//        msg.textObject = getTextObj(content.getTitle());
         msg.imageObject = getImageObj();
         switch (content.getType()) {
             case ShareContent.WEB_PAGE:
