@@ -30,7 +30,7 @@ public class WeChatShare implements IShare {
 
     private static final String TAG = "WeChatShare";
 
-    private static final int THUMB_SIZE = 150;
+    private static final int THUMB_SIZE = 100;
 
     private IWXAPI wxapi;
 
